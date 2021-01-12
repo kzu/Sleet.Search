@@ -28,11 +28,11 @@ namespace Sleet.Search
         /// packageTypeFilter (multiple)
         /// semVerLevel=2.0.0
         /// </summary>
-        [FunctionName("Query")]
+        [FunctionName("query")]
         public static async Task<IActionResult> Run(
-                    [HttpTrigger(AuthorizationLevel.Function, "get", Route = "search/source/{source}/query")] HttpRequest req, string source, ILogger log)
+                    [HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequest req, ILogger log)
         {
-            var sourceUrl = new Url(HttpUtility.UrlDecode(source));
+            var sourceUrl = new Url("https://kzu.blob.core.windows.net/nuget/search/query");
             var query = req.Query["q"];
             var skip = 0;
             var take = 100;
